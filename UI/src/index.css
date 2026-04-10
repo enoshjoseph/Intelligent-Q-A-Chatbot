@@ -1,0 +1,108 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+body {
+  font-family: 'Poppins', sans-serif;
+}
+
+@keyframes gradientFlow {
+  0% {
+    background-position: 0% center;
+  }
+  100% {
+    background-position: 200% center;
+  }
+}
+
+.animate-gradient {
+  animation: gradientFlow 6s linear infinite;
+}
+
+@keyframes slideUp {
+  0% {
+    transform: translateY(100%);
+    opacity: 0;
+  }
+  20% {
+    transform: translateY(0%);
+    opacity: 1;
+  }
+  80% {
+    transform: translateY(0%);
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(-100%);
+    opacity: 0;
+  }
+}
+
+.animate-slide {
+  animation: slideUp 2s ease-in-out;
+}
+
+/* Main heading animation */
+@keyframes slideBlurLeft {
+  0% {
+    transform: translateX(-60px);
+    opacity: 0;
+    filter: blur(10px);
+  }
+  100% {
+    transform: translateX(0);
+    opacity: 1;
+    filter: blur(0);
+  }
+}
+
+/* Subheading animation */
+@keyframes slideBlurUp {
+  0% {
+    transform: translateY(40px);
+    opacity: 0;
+    filter: blur(10px);
+  }
+  100% {
+    transform: translateY(0);
+    opacity: 1;
+    filter: blur(0);
+  }
+}
+
+/* Classes */
+.animate-heading {
+  animation: slideBlurLeft 1s ease-out forwards;
+}
+
+.animate-subheading {
+  animation: slideBlurUp 1s ease-out forwards;
+  animation-delay: 0.4s; /* appears after heading */
+}
+
+.animate-heading {
+  animation: 
+    slideBlurLeft 1s ease-out forwards,
+    gradientFlow 6s linear infinite;
+}
+
+@keyframes borderFlow {
+  0% {
+    background-position: 0% center;
+  }
+  100% {
+    background-position: 200% center;
+  }
+}
+
+.animate-border {
+  background: linear-gradient(
+    90deg,
+    #4285F4,
+    #34A853,
+    #FBBC05,
+    #EA4335,
+    #4285F4
+  );
+  background-size: 200% auto;
+  animation: borderFlow 4s linear infinite;
+}
