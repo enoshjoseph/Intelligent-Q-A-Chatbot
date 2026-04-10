@@ -8,6 +8,10 @@ import io
 from .chunking import chunk_text
 from .vision import vision_extract
 
+# Write all temp images to the temp/ subfolder (not the CWD)
+TEMP_DIR = os.path.abspath(os.path.join(os.path.dirname(__file__), "..", "temp"))
+os.makedirs(TEMP_DIR, exist_ok=True)
+
 
 def structured_pdf_ingest(path):
     elements = partition_pdf(
@@ -50,7 +54,7 @@ def ocr_ingest(path):
 )
 
     for page_num, page_img in enumerate(pages, start=1):
-        temp_path = f"temp_page_{page_num}.jpg"
+        temp_path = os.path.join(TEMP_DIR, f"temp_page_{page_num}.jpg")
         page_img.save(temp_path)
 
         text = vision_extract(temp_path).strip()
@@ -75,7 +79,7 @@ def extract_images_from_pdf(path):
             xref = img[0]
             base_image = doc.extract_image(xref)
 
-            temp_path = f"temp_img_{page_num}.jpg"
+            temp_path = os.path.join(TEMP_DIR, f"temp_img_{page_num}.jpg")
             with open(temp_path, "wb") as f:
                 f.write(base_image["image"])
 
